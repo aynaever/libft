@@ -6,7 +6,7 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:29:22 by aymane            #+#    #+#             */
-/*   Updated: 2021/06/30 07:26:35 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/04 07:47:04 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = -1;
 	j = 0;
 	if (ptr == NULL)
-		return ('\0');
+		return (NULL);
 	while (++i < ft_strlen(s1))
 	{
 		ptr[i] = s1[i];

@@ -6,7 +6,7 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 06:47:56 by aymane            #+#    #+#             */
-/*   Updated: 2021/06/30 07:12:54 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/04 07:46:28 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		len_rslt = 0;
 	rslt = (char *)malloc(len_rslt * sizeof(char));
 	if (!rslt)
-		return ('\0');
+		return (NULL);
 	ft_strlcpy(rslt, &s1[start], len_rslt);
 	return (rslt);
 }

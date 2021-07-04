@@ -6,7 +6,7 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 07:07:10 by anaouadi          #+#    #+#             */
-/*   Updated: 2021/06/30 19:45:56 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/04 07:53:19 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
+	if (start >= (unsigned int)ft_strlen(s))
+		return (ft_calloc(1, 1));
 	ptr = (char *)malloc(len + 1);
 	if (ptr == NULL)
 		return (NULL);

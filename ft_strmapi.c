@@ -6,7 +6,7 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 00:30:04 by aymane            #+#    #+#             */
-/*   Updated: 2021/06/30 07:10:34 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/04 07:46:48 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	len_s = ft_strlen(s);
 	rslt = (char *)malloc(len_s * sizeof(char) + 1);
 	if (!rslt)
-		return ('\0');
+		return (NULL);
 	while (s[i])
 	{
 		rslt[i] = f(i, s[i]);

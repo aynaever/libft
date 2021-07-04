@@ -6,90 +6,82 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 22:07:00 by anaouadi          #+#    #+#             */
-/*   Updated: 2021/06/30 22:13:06 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/04 07:58:25 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static int	frees(char **str, int size)
-{
-	while (size--)
-		free(str[size]);
-	return (-1);
-}
-
-static int	count_words(const char *str, char charset)
-{
-	int	i;
-	int	words;
-
-	words = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i + 1] == charset || str[i + 1] == '\0') == 1
-			&& (str[i] == charset || str[i] == '\0') == 0)
-			words++;
-		i++;
-	}
-	return (words);
-}
-
-static void	write_word(char *dest, const char *from, char charset)
+static int	is_delimeter(char const *s, char c)
 {
 	int	i;
 
 	i = 0;
-	while ((from[i] == charset || from[i] == '\0') == 0)
+	while (s[i] == c)
 	{
-		dest[i] = from[i];
 		i++;
 	}
-	dest[i] = '\0';
+	return (i);
 }
 
-static int	write_split(char **split, const char *str, char charset)
+static int	next_delimeter(char const *s, char c)
 {
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+	{
+		i++;
+	}
+	return (i);
+}
+
+static int	count_words(char const *s, char c)
+{
+	int	i;
+	int	state;
+	int	wc;
+
+	i = 0;
+	wc = 0;
+	state = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			state = 0;
+		else if (state == 0)
+		{
+			state = 1;
+			++wc;
+		}
+		i++;
+	}
+	return (wc);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**rslt;
+	int		wc;
 	int		i;
 	int		j;
-	int		word;
 
-	word = 0;
+	if (!s)
+		return (NULL);
+	wc = count_words(s, c);
 	i = 0;
-	while (str[i] != '\0')
+	j = is_delimeter(s, c);
+	rslt = (char **)malloc(sizeof(char *) * wc + 1);
+	if (!rslt)
+		return (NULL);
+	while (i < wc)
 	{
-		if ((str[i] == charset || str[i] == '\0') == 1)
-			i++;
-		else
-		{
-			j = 0;
-			while ((str[i + j] == charset || str[i + j] == '\0') == 0)
-				j++;
-			split[word] = (char *)malloc(sizeof(char) * (j + 1));
-			if ((split[word]) == NULL)
-				return (frees(split, word - 1));
-			write_word(split[word], str + i, charset);
-			i += j;
-			word++;
-		}
+		rslt[i] = ft_substr(&s[j], 0, next_delimeter(&s[j], c));
+		j += next_delimeter(&s[j], c);
+		j += is_delimeter(&s[j], c);
+		i++;
 	}
-	return (0);
-}
-
-char	**ft_split(const char *str, char c)
-{
-	char	**res;
-	int		words;
-
-	if (!str)
-		return (NULL);
-	words = count_words(str, c);
-	res = (char **)malloc(sizeof(char *) * (words + 1));
-	if ((res) == NULL)
-		return (NULL);
-	res[words] = 0;
-	if (write_split(res, str, c) == -1)
-		return (NULL);
-	return (res);
+	rslt[i] = NULL;
+	return (rslt);
 }
