@@ -6,7 +6,7 @@
 /*   By: anaouadi <anaouadi@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 03:03:40 by anaouadi          #+#    #+#             */
-/*   Updated: 2021/07/04 07:53:01 by anaouadi         ###   ########.fr       */
+/*   Updated: 2021/07/05 16:41:06 by anaouadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	j;
 	size_t	lenLittle;
 
-	if (ft_strlen(little) == 0)
+	if (!ft_strlen(little))
 		return ((char *)big);
-	if (len == 0 || big[0] == '\0')
-		return (NULL);
 	i = 0;
 	lenLittle = ft_strlen(little);
-	while (big[i] && len - lenLittle > 0)
+	while (big[i] && len >= lenLittle)
 	{
 		j = 0;
 		while (little[j])
